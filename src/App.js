@@ -38,11 +38,22 @@ function App() {
       },
     ]);
     try {
-      const response = await axios.post("http://localhost:3001/callLex", {
-        message: message,
-        userid: currentbotid,
-        sessionAttributes: sessionAttributes,
-      });
+      // const response = await axios.post("http://localhost:3001/callLex", {
+      //   message: message,
+      //   userid: currentbotid,
+      //   sessionAttributes: sessionAttributes,
+      // });
+
+      //Using the EC2 instance level get
+
+      const response = await axios.post(
+        "http://localhost/nodeappprod/callLex",
+        {
+          message: message,
+          userid: currentbotid,
+          sessionAttributes: sessionAttributes,
+        }
+      );
       setsessionAttributes(response["sessionAttributes"]);
       setdummyarr((current) => [
         ...current,
