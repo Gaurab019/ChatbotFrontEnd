@@ -1,3 +1,4 @@
+require("dotenv").config();
 import "./App.css";
 import { useState } from "react";
 import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
@@ -46,14 +47,11 @@ function App() {
 
       //Using the EC2 instance level get
 
-      const response = await axios.post(
-        "http://localhost/nodeappprod/callLex",
-        {
-          message: message,
-          userid: currentbotid,
-          sessionAttributes: sessionAttributes,
-        }
-      );
+      const response = await axios.post(process.env.SERVERURI, {
+        message: message,
+        userid: currentbotid,
+        sessionAttributes: sessionAttributes,
+      });
       setsessionAttributes(response["sessionAttributes"]);
       setdummyarr((current) => [
         ...current,
